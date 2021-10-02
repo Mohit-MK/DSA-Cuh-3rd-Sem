@@ -1,0 +1,82 @@
+#include<iostream>
+using namespace std;
+const int order=2;
+class table
+{
+  private:
+    int mat[order][order];
+  public: table();
+  void create(); void display();
+  void add_mat(table &a,table &b); void sub_mat(table &a,table &b); void mul_mat(table &a,table &b);
+  void transpose(table &m1);
+};
+table :: table()
+{
+  for(int m=0;m<order;m++)
+    for(int n=0;n<order;n++)
+        mat[m][n]=0;
+}
+void table :: create()
+{
+   for(int m=0;m<order;m++)
+    for(int n=0;n<order;n++)
+      cin>>mat[m][n];
+}
+void table :: add_mat(table &a,table &b)
+{
+  for(int m=0;m<order;m++)
+    for(int n=0;n<order;n++)
+        {
+           mat[m][n]=a.mat[m][n]+b.mat[m][n];
+        }
+}
+void table :: sub_mat(table &a,table &b)
+{
+  for(int m=0;m<order;m++)
+    for(int n=0;n<order;n++)
+        {
+           mat[m][n]=a.mat[m][n]-b.mat[m][n];
+        }
+}
+void table :: mul_mat(table &a,table &b)
+{
+  for (int k=0;k<order;k++)
+    for(int m=0;m<order;m++)
+      for(int n=0;n<order;n++)
+        {
+           mat[m][n]=a.mat[m][n]*b.mat[m][n];
+        }
+}
+void table :: transpose(table &m1)
+{
+    for(int m=0;m<order;m++)
+      for(int n=0;n<order;n++)
+      {
+          mat[m][n]=m1.mat[n][m];
+      }
+}
+void table :: display()
+{
+   for(int m=0;m<order;m++)
+   {
+      for(int n=0;n<order;n++)
+       {
+           cout<<mat[m][n]<<" ";
+       }
+       cout<<endl;
+   }
+}
+int main()
+{
+  table a,b,mat3;
+  cout<<"Enter 1st Matrix: "; a.create();
+  cout<<"\nEnter 2nd Matrix: "; b.create();
+  cout<<"\n1st table: "<<endl; a.display();
+  cout<<"\n2nd table: "<<endl; b.display(); mat3.add_mat(a,b);
+  cout<<"\nAddition of 2 Matrix: "<<endl; mat3.display();
+  cout<<"\nSubtraction of 2 Matrix: "<<endl; mat3.sub_mat(a,b); mat3.display();
+  cout<<"\nMultiplication of 2 Matrix: "<<endl; mat3.mul_mat(a,b); mat3.display();
+  cout<<"\nTranspose of 1st Matrix: "<<endl; mat3.transpose(a); mat3.display();
+  cout<<"\nTranspose of 2nd Matrix: "<<endl; mat3.transpose(b); mat3.display();
+  return 0;
+}
